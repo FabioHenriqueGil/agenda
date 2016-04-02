@@ -46,28 +46,39 @@ public class ContatoDao {
 	}
 
 	public List<Contato> getLista() {
+		List<Contato> contatos = new ArrayList<Contato>();
+		String sql ="select * from contato";
+		
 		try {
-			List<Contato> contatos = new ArrayList<Contato>();
-			PreparedStatement stmt = this.connection.prepareStatement("select * from contato");
+			
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			//executa
 			ResultSet resultado = stmt.executeQuery();
+			//alimenta a lista
 			while (resultado.next()) {
 				Contato contato = new Contato();
 				contato.setId(resultado.getLong("id"));
 				contato.setNome(resultado.getString("nome"));
 				contato.setEmail(resultado.getString("email"));
 				contato.setEndereco(resultado.getString("endereco"));
+
 				
-//				Date dataNascimento = resultado.getDate("dataNascimento");
-//				ZonedDateTime dataZoned = ZonedDateTime.parse(dataNascimento.toString());
-//				contato.setDataNascimento(dataZoned );
-//				
-				
+				//não consegui fazer a data ainda.... :/
+				// Date dataNascimento = resultado.getDate("dataNascimento");
+				// ZonedDateTime dataZoned =
+				// ZonedDateTime.parse(dataNascimento.toString());
+				// contato.setDataNascimento(dataZoned );
+				//
+
 				contatos.add(contato);
 			}
+			//fecha conexão
 			resultado.close();
 			stmt.close();
 			return contatos;
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
