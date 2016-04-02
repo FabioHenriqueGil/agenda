@@ -3,25 +3,31 @@ package br.ufpr.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import br.ufpr.jdbc.ConnectionFactory;
 import br.ufpr.modelo.Contato;
+import sun.util.calendar.ZoneInfo;
 
 public class ContatoDao {
 
-	private Connection conection;
+	private Connection connection;
 
 	public ContatoDao() {
-		this.conection = new ConnectionFactory().getConnection();
+		this.connection = new ConnectionFactory().getConnection();
 	}
 
 	public void adiciona(Contato contato) {
 		String sql = "insert into contato " + "(nome,email,endereco,dataNascimento)" + "values(?,?,?,?)";
 
 		try {
-			PreparedStatement stmt = conection.prepareStatement(sql);
+			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, contato.getNome());
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
@@ -38,9 +44,31 @@ public class ContatoDao {
 		}
 
 	}
-	
-	public List<Contato> getLista() {
-		return null;
-	}
 
+	public List<Contato> getLista() {
+		try {
+			List<Contato> contatos = new ArrayList<Contato>();
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contato");
+			ResultSet resultado = stmt.executeQuery();
+			while (resultado.next()) {
+				Contato contato = new Contato();
+				contato.setId(resultado.getLong("id"));
+				contato.setNome(resultado.getString("nome"));
+				contato.setEmail(resultado.getString("email"));
+				contato.setEndereco(resultado.getString("endereco"));
+				
+//				Date dataNascimento = resultado.getDate("dataNascimento");
+//				ZonedDateTime dataZoned = ZonedDateTime.parse(dataNascimento.toString());
+//				contato.setDataNascimento(dataZoned );
+//				
+				
+				contatos.add(contato);
+			}
+			resultado.close();
+			stmt.close();
+			return contatos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

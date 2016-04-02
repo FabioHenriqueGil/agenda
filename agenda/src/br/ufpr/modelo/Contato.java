@@ -9,7 +9,7 @@ public class Contato {
 	private String endereco;
 	private ZonedDateTime dataNascimento;
 
-	private Contato() {
+	public Contato() {
 
 	}	
 	
@@ -51,6 +51,13 @@ public class Contato {
 
 	public void setDataNascimento(ZonedDateTime dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	public Long getId() {
+		return id;
 	}
 
 }
