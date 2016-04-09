@@ -1,6 +1,6 @@
 package br.ufpr.dao;
 
-import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class ContatoDaoTeste {
 	@Test
 	public void test() {
 		ContatoDao contatoDao = new ContatoDao();
-		Contato contato = new Contato("Fabio", "fabio.gil@ufpr.br", "Palotina", ZonedDateTime.now());
+		Contato contato = new Contato("Fabio", "fabio.gil@ufpr.br", "Palotina", Calendar.getInstance());
 		contatoDao.adiciona(contato);
 
 		List<Contato> lista = contatoDao.getLista();

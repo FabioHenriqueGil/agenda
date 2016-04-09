@@ -2,6 +2,7 @@ package br.ufpr.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import br.ufpr.dao.ContatoDao;
+import br.ufpr.modelo.Contato;
+
 /**
  * Servlet implementation class AddContatoServlet
  */
 @WebServlet("/adicionaContato")
 public class AddContatoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -35,20 +40,27 @@ public class AddContatoServlet extends HttpServlet {
 		String endereco = request.getParameter("endereco");
 		String dataNascimento = request.getParameter("dataNascimento");
 
-		PrintWriter out = response.getWriter();
+		
+		
+		ContatoDao contatoDao = new ContatoDao();
+		//Contato contato = new Contato(nome, email, endereco, Calendar.getInstance());
+		//contatoDao.adiciona(contato);
 
-		out.println("<html>");
-		out.println("<head><title>exemplo</title></head>");
-		out.println("<body>");
+		response.sendRedirect("adicionaContato.html");
 		
-		out.println("<br>Nome: "+nome);
-		out.println("<br>E-Mail: "+email);
-		out.println("<br>Endereço: "+endereco);
-		out.println("<br>Data de Nascimento: "+dataNascimento);
-		
-		
-		out.println("</body>");
-		out.println("</html>");
+	//	PrintWriter out = response.getWriter();
+//		out.println("<html>");
+//		out.println("<head><title>exemplo</title></head>");
+//		out.println("<body>");
+//		
+//		out.println("<br>Nome: "+nome);
+//		out.println("<br>E-Mail: "+email);
+//		out.println("<br>Endereço: "+endereco);
+//		out.println("<br>Data de Nascimento: "+dataNascimento);
+//		
+//		
+//		out.println("</body>");
+//		out.println("</html>");
 
 	}
 

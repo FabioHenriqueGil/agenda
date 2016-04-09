@@ -1,19 +1,15 @@
 package br.ufpr.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import br.ufpr.jdbc.ConnectionFactory;
 import br.ufpr.modelo.Contato;
-import sun.util.calendar.ZoneInfo;
 
 public class ContatoDao {
 
@@ -31,7 +27,8 @@ public class ContatoDao {
 			stmt.setString(1, contato.getNome());
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
-			stmt.setDate(4, new Date(contato.getDataNascimento().toEpochSecond() * 1000));
+			stmt.setDate(4, new java.sql.Date(
+	                Calendar.getInstance().getTimeInMillis()));
 
 			// executa
 			stmt.execute();
@@ -39,6 +36,7 @@ public class ContatoDao {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.out.println("erro no adiciona contato");
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
@@ -61,14 +59,13 @@ public class ContatoDao {
 				contato.setNome(resultado.getString("nome"));
 				contato.setEmail(resultado.getString("email"));
 				contato.setEndereco(resultado.getString("endereco"));
-
 				
-				//não consegui fazer a data ainda.... :/
-				// Date dataNascimento = resultado.getDate("dataNascimento");
-				// ZonedDateTime dataZoned =
-				// ZonedDateTime.parse(dataNascimento.toString());
-				// contato.setDataNascimento(dataZoned );
-				//
+				Calendar dataNascimento = Calendar.getInstance();
+				
+			    dataNascimento.setTime(resultado.getDate("dataNascimento"));
+			    //contato.setDataNascimento(dataNascimento);
+				
+				
 
 				contatos.add(contato);
 			}

@@ -1,19 +1,19 @@
 package br.ufpr.modelo;
 
-import java.time.ZonedDateTime;
+import java.util.Calendar;
 
 public class Contato {
 	private Long id;
 	private String nome;
 	private String email;
 	private String endereco;
-	private ZonedDateTime dataNascimento;
+	private Calendar dataNascimento;
 
 	public Contato() {
 
 	}	
 	
-	public Contato(String nome, String email, String endereco, ZonedDateTime dataNascimento) {
+	public Contato(String nome, String email, String endereco, Calendar dataNascimento) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -45,11 +45,11 @@ public class Contato {
 		this.endereco = endereco;
 	}
 
-	public ZonedDateTime getDataNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(ZonedDateTime dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
