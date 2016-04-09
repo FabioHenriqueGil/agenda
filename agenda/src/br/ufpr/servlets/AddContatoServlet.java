@@ -39,14 +39,16 @@ public class AddContatoServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String endereco = request.getParameter("endereco");
 		String dataNascimento = request.getParameter("dataNascimento");
-
-		
 		
 		ContatoDao contatoDao = new ContatoDao();
-		//Contato contato = new Contato(nome, email, endereco, Calendar.getInstance());
-		//contatoDao.adiciona(contato);
-
+		Contato contato = new Contato(nome, email, endereco, Calendar.getInstance());
+		contatoDao.adiciona(contato);
+		
+		
 		response.sendRedirect("adicionaContato.html");
+		
+		//new ContatoDao().adiciona(contato);
+		
 		
 	//	PrintWriter out = response.getWriter();
 //		out.println("<html>");

@@ -12,11 +12,17 @@ public class ConnectionFactory {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection("jdbc:mysql://localhost/agenda", "root", "root");
-		} catch (SQLException | ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "impossível carregar o Driver.");
+		} catch(ClassNotFoundException erro){
+			JOptionPane.showMessageDialog(null,"Driver JDBC-MySQL não encontrado!!");
 			System.exit(0);
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			erro.printStackTrace();
+			throw new RuntimeException(erro);
+		}
+		catch(SQLException erro){
+			JOptionPane.showMessageDialog(null,"Problema na conexão com a fonte de dados");
+			System.exit(0);
+			erro.printStackTrace();
+			throw new RuntimeException(erro);
 		}
 	}
 }
