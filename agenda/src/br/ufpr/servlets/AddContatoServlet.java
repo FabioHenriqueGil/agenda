@@ -45,7 +45,7 @@ public class AddContatoServlet extends HttpServlet {
 		contatoDao.adiciona(contato);
 		
 		
-		response.sendRedirect("adicionaContato.html");
+		response.sendRedirect("index.jsp");
 		
 		//new ContatoDao().adiciona(contato);
 		
