@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.io.PrintWriter"%>
 <%@page import="br.ufpr.dao.ContatoDao"%>
 <%@page import="br.ufpr.modelo.Contato"%>
@@ -13,48 +14,44 @@
 </script>
 </head>
 <body>
-
 	<div class="container">
 		<div class="panel panel-primary">
-			<div class="table-responsive">
-				<table class="table">
-					<tr>
-						<td>ID</td>
-						<td>NOME</td>
-						<td>E-MAIL</td>
-						<td>ENDEREÇO</td>
-						<td>DATA DE NASCIMENTO</td>
-					</tr>
-					<%
-						ContatoDao contatoDao = new ContatoDao();
-						List<Contato> lista = contatoDao.getLista();
-
-						for (Contato c : lista) {
-					%>
-					<tr>
-					<tr>
-						<td><%=c.getId()%></td>
-						<td><%=c.getNome()%></td>
-						<td><%=c.getEmail()%></td>
-						<td><%=c.getEndereco()%></td>
-						<td><%=c.getDataNascimento()%></td>
-					</tr>
-					<%
-						}
-					%>
-
-					<!-- 	System.out.println("ID="+ c.getId()+ " NOME="+ c.getNome()+ " EMAIL="+ c.getEmail()+ " ENDERECO="+ -->
-					<!-- 			c.getEndereco()+ " DATA NASC="+ c.getDataNascimento()); -->
-					<!-- } -->
-
-					<tr>
-						<td><button
-								onclick="window.location.href='adicionaContato.html';">ADD</button></td>
-
-					</tr>
-				</table>
+			<div class="panel-heading">
+				<center>Lista de Contatos</center>
 			</div>
 
+			<div class="panel panel-primary">
+				<div class="table-responsive">
+					<table class="table">
+						<tr>
+							<td>ID</td>
+							<td>NOME</td>
+							<td>E-MAIL</td>
+							<td>ENDEREÇO</td>
+							<td>DATA DE NASCIMENTO</td>
+						</tr>
+						<%
+							ContatoDao contatoDao = new ContatoDao();
+							List<Contato> lista = contatoDao.getLista();
+
+							for (Contato c : lista) {
+						%>
+						<tr>
+							<td><%=c.getId()%></td>
+							<td><%=c.getNome()%></td>
+							<td><%=c.getEmail()%></td>
+							<td><%=c.getEndereco()%></td>
+							<td><%=new SimpleDateFormat("dd/MM/yyyy").format(c.getDataNascimento().getTime())%></td>
+						</tr>
+						<%
+							}
+						%>
+					</table>
+				</div>
+			</div><center>
+			<button class="btn btn-primary"
+				onclick="window.location.href='adicionaContato.html';">ADD</button>
+				</center>
 		</div>
 	</div>
 </body>

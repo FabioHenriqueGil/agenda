@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,9 +29,7 @@ public class ContatoDao {
 			stmt.setString(2, contato.getEmail());
 			stmt.setString(3, contato.getEndereco());
 			stmt.setDate(4, new java.sql.Date(
-	                Calendar.getInstance().getTimeInMillis()));
-
-			// executa
+	                contato.getDataNascimento().getTimeInMillis()));
 			stmt.execute();
 			stmt.close();
 
@@ -63,7 +62,7 @@ public class ContatoDao {
 				Calendar dataNascimento = Calendar.getInstance();
 				
 			    dataNascimento.setTime(resultado.getDate("dataNascimento"));
-			    //contato.setDataNascimento(dataNascimento);
+			    contato.setDataNascimento(dataNascimento);
 				
 				
 
