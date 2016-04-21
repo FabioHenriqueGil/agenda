@@ -20,6 +20,14 @@ public class Contato {
 		this.endereco = endereco;
 		this.dataNascimento = dataNascimento;
 	}
+	public Contato(Long id, String nome, String email, String endereco, Calendar dataNascimento) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.endereco = endereco;
+		this.dataNascimento = dataNascimento;
+	}
 
 	public String getNome() {
 		return nome;

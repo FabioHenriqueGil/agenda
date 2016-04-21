@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import br.ufpr.dao.ContatoDao;
 import br.ufpr.modelo.Contato;
 
 /**
- * Servlet implementation class AddContatoServlet
+ * Servlet implementation class alteraContatoServlet
  */
-@WebServlet("/adicionaContato")
-public class AddContatoServlet extends HttpServlet {
+@WebServlet("/alteraContatoServlet")
+public class alteraContatoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AddContatoServlet() {
+	public alteraContatoServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,6 +35,7 @@ public class AddContatoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String endereco = request.getParameter("endereco");
@@ -46,16 +46,16 @@ public class AddContatoServlet extends HttpServlet {
 			dataNascimento.setTime(format.parse(dataNascimentoTXT));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			
+
 			e.printStackTrace();
 			throw new RuntimeException();
 		}
 		ContatoDao contatoDao = new ContatoDao();
-		Contato contato = new Contato(nome, email, endereco, dataNascimento);
-		contatoDao.adiciona(contato);
-		
+		Contato contato = new Contato(id, nome, email, endereco, dataNascimento);
+		contatoDao.altera(contato);
+
 		response.sendRedirect("index.jsp");
-		
+
 	}
 
 	/**

@@ -29,6 +29,7 @@
 							<td>E-MAIL</td>
 							<td>ENDEREÇO</td>
 							<td>DATA DE NASCIMENTO</td>
+							<td>Alterar</td>
 						</tr>
 						<%
 							ContatoDao contatoDao = new ContatoDao();
@@ -42,16 +43,21 @@
 							<td><%=c.getEmail()%></td>
 							<td><%=c.getEndereco()%></td>
 							<td><%=new SimpleDateFormat("dd/MM/yyyy").format(c.getDataNascimento().getTime())%></td>
+							<td><button id="<%=c.getId()%>" class="btn btn-primary"
+									onclick="window.location.href='alterarContato.jsp?id=<%=c.getId()%>';">Alterar</button>
+
+							</td>
 						</tr>
 						<%
 							}
 						%>
 					</table>
 				</div>
-			</div><center>
-			<button class="btn btn-primary"
-				onclick="window.location.href='adicionaContato.html';">ADD</button>
-				</center>
+			</div>
+			<center>
+				<button class="btn btn-primary"
+					onclick="window.location.href='adicionaContato.html';">ADD</button>
+			</center>
 		</div>
 	</div>
 </body>
